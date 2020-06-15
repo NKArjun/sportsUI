@@ -1,0 +1,53 @@
+<div class="container container-styles">
+    <div *ngIf="show">
+    <form class="text-center border border-light p-5" [formGroup]="createTeamForm" #myForm="ngForm" (ngSubmit)="createTeam()">
+        <select class="form-control mb-3" formControlName="sports">
+            <option value="" selected disabled>Choose Sports</option>
+            <option value="cricket">Cricket</option>
+            <option value="football">FootBall</option>
+            <option value="batminton">Batminton</option>
+        </select>
+        <button type="button" class="btn btn-info mb-3 btn-sm" (click)="chooseSport()">Select Players</button>
+        <div *ngIf="cricket">   
+            <div [formGroup]="playerGroup" *ngFor="let playerGroup of createTeamForm.controls.playerIdArray.controls;let i = index;">
+                <input type="text" formControlName="playerId" placeholder="Enter Player Registered UserId" class="form-control">
+                <small *ngIf="myForm.submitted && createTeamForm.controls.playerIdArray.controls[i].invalid" class="text-danger form-text text-muted mb-4">UserId Should be Unique</small>
+                <small *ngIf="error[i]" class="text-danger text-muted">Enter Correct userId</small>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col">
+            <button type="button" class="btn btn-primary btn-sm" (click)="addPlayer()">Add Player</button>
+            </div>
+            <div class="col">
+                <button type="button" [disabled]="playerListSize>1 ? false: true" class="btn btn-sm btn-danger" (click)="removePlayer()">Remove Player</button>
+            </div>
+            </div>
+            <hr>
+
+            <input type="text" class="form-control" formControlName="location"
+                placeholder="Enter Area">
+                <small *ngIf="myForm.submitted && createTeamForm.controls.location.errors?.required" class="text-danger form-text text-muted mb-4">Area Value is Must</small>
+            <hr>
+            <input type="text" class="form-control" formControlName="ground"
+                placeholder="Enter Ground">
+                <small *ngIf="myForm.submitted && createTeamForm.controls.ground.hasError('required')" class="text-danger form-text text-muted mb-4">Ground Value is must</small>
+            <hr>
+            <select id="id" class="mb-3 form-control" formControlName="captainUserId">
+                <option id="id1" disabled value="">Select Captain</option>
+                <option value="{{player.playerId}}" *ngFor="let player of createTeamForm.controls.playerIdArray.value">{{player.playerId}}</option>
+            </select>
+            <small *ngIf="myForm.submitted && createTeamForm.controls.captainUserId.hasError('required')" class="text-danger form-text text-muted">Captain Value is required</small>
+            <hr> 
+            <button type="submit" class="btn btn-sm btn-success"><span
+                class="spinner-border spinner-border-lg button-spinner" role="status" *ngIf="showSpinner"
+                aria-hidden="true"></span><span *ngIf="!showSpinner">Create Team</span></button>
+        </div>
+    </form>
+    </div>
+
+    <div *ngIf="!show" class="border border-light p-5">
+        <p class="h4">You have Successfully Created Team.Your team code is: <strong>"{{teamCode}}"</strong></p>
+        <button class="btn btn-warning mt-2" (click)="teamPage()">Edit Team</button>
+    </div>
+</div>

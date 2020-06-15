@@ -1,0 +1,47 @@
+<div class="body">
+	<div class="container container-styles">
+		<div class="col-md-10">
+			<!-- <div class="card"> -->
+			<div class="card-body">
+				<!-- Default form login -->
+				<form [formGroup]="loginForm" #myForm="ngForm" (ngSubmit)="login()"
+					class="text-center border border-light p-5">
+					<p class="h4 mb-4">Sign in</p>
+					<input type="email" class="form-control mb-4" placeholder="E-mail" formControlName="email"
+						name="email" required>
+					<small *ngIf="myForm.submitted && loginForm.controls.email.invalid"
+						class="text-danger form-text text-muted mb-4">Check Your MailId</small>
+					<input type="password" class="form-control mb-4" placeholder="Password" formControlName="password"
+						name="password" required>
+					<small *ngIf="myForm.submitted && loginForm.controls.password.invalid"
+						class="text-danger form-text text-muted mb-4">Password is required</small>
+					<p class="text-danger text-muted mt-2" *ngIf="errorMessage!=null">{{errorMessage}}</p>
+					<div class="d-flex justify-content-around">
+						<div>
+							<a style="color: rgb(0, 132, 255);" (click)="forgotPassword()">Forgot password?</a>
+						</div>
+					</div>
+					<button mdbBtn color="info" block="true" class="my-4" type="submit"><span
+							class="spinner-border spinner-border-lg button-spinner" role="status" *ngIf="showSpinner"
+							aria-hidden="true"></span><span *ngIf="!showSpinner">Sign in</span></button>
+					<p>Not a member?
+						<a [routerLink]="['/register']">Register</a>
+					</p>
+					<p>or sign in with:</p>
+					<a type="button" class="light-blue-text mx-2" (click)="signInwithGoogle()">
+						<mdb-icon fab icon="google"></mdb-icon>
+					</a>
+					<a type="button" class="light-blue-text mx-2">
+						<mdb-icon fab icon="twitter"></mdb-icon>
+					</a>
+					<a type="button" class="light-blue-text mx-2">
+						<mdb-icon fab icon="linkedin"></mdb-icon>
+					</a>
+					<a type="button" class="light-blue-text mx-2">
+						<mdb-icon fab icon="github"></mdb-icon>
+					</a>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

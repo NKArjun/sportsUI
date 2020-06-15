@@ -1,0 +1,68 @@
+<div *ngIf="showSpinnerPage">
+    <img src="../../../../assets//images/Spinner.gif" style="width: 100%; height: 50%;">
+</div>
+
+
+<div class="container container-styles" *ngIf="!showSpinnerPage">
+    <section class="section">
+        <div class="row">
+            <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 mb-4">     
+                <div class="card">
+                    <div class="mdb-color lighten-3 head text-center" style="width: 85%;height: 100%;">
+                        <h5 class="mb-0 font-weight-bold">Edit Photo</h5>
+                    </div>
+                    <div class="card-body card-body-cascade text-center">
+                        <!-- <img src="../../../../assets/images/logo.jpg"> -->
+                        <img *ngIf="!show && noProfile" src="../../../../assets/images/profile.jpg" style="width: 32%;">
+                        <img *ngIf="!show && !noProfile" src="https://sportsservice.azurewebsites.net/images/{{image}}" style="width: 32%">
+                        <img *ngIf="show" [src]="imageUrl" style="width: 32%">
+                        <p class="text-muted">Profile Photo</p>
+                        <div class="row">
+                            <input type="file" style="width: 50%;" (change)="processFile($event.target.files)">
+                            <button class="btn btn-success btn-sm" (click)="uploadImage()"><span *ngIf="spinnerUpload"><span
+                                class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                            Loading...</span><span *ngIf="!spinnerUpload">Upload</span></button>
+                            <button class="btn btn-danger btn-rounded btn-sm" (click)="deleteImage()">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="mdb-color lighten-3 head text-center" style="width: 85%;height: 100%;">
+                        <h5 class="mb-0 font-weight-bold">Edit Account</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <form [formGroup]="profileForm" (ngSubmit)="update()">
+                        <select class="form-control" formControlName="batsman" name="batsman">
+                            <option value="" disabled selected>Select Batsman type</option>
+                            <option value="RightHandBatsman">Right Hand Batsman</option>
+                            <option value="LeftHandBatsman">Left Hand Batsman</option>
+                        </select>
+                        <hr>
+                        <select class="form-control" formControlName="bowler" name="bowler">
+                            <option disabled selected value="">Select Bowling Type</option>
+                            <option value="RightHandBowler">Right Hand Bowler</option>
+                            <option value="LeftHandBowler">Left Hand Bowler</option>
+                        </select>
+                        <hr>
+                        <select class="form-control" formControlName="ability" name="ability">
+                            <option value="" disabled selected>Select Ability</option>
+                            <option value="Batsman">Batsman</option>
+                            <option value="AllRounder">All Rounder</option>
+                            <option value="Bowler">Bowler</option>
+                        </select>
+                        <hr>
+                        <button class="btn btn-success btn-sm" type="submit"><span *ngIf="spinnerUpdate"><span
+                            class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        Loading...</span><span *ngIf="!spinnerUpdate">Update</span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

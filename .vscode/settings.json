@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/a78e7341-55fa-4a32-8bad-00ca2d1ccdd3/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/SportsUI",
+    "appService.deploySubpath": "dist\\SportsUI"
+}

@@ -1,0 +1,89 @@
+<div class="container-fluid container-styles" *ngIf="!showTerms">
+	<div class="col-md-9">
+		<!-- Default form register -->
+		<form [formGroup]="registerForm" #myForm="ngForm" (ngSubmit)="register()"
+			class="text-center border border-light p-5">
+
+			<p class="h4 mb-4">Sign up</p>
+
+			<div class="form-row mb-4">
+				<div class="col">
+					<!-- First name -->
+					<input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name"
+						formControlName="firstName" name="firstName" required>
+					<small *ngIf="myForm.submitted && registerForm.controls.firstName.invalid"
+						class="form-text text-danger text-muted">Name Contains only Alphabets</small>
+				</div>
+				<div class="col">
+					<!-- Last name -->
+					<input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name"
+						formControlName="lastName" name="lastName">
+					<small *ngIf="myForm.submitted && registerForm.controls.lastName.invalid"
+						class="form-text text-danger text-muted">Name contains only Alphabets</small>
+				</div>
+			</div>
+
+			<!-- E-mail -->
+			<div class="mb-4">
+				<input type="email" id="defaultRegisterFormEmail" class="form-control" placeholder="E-mail"
+					formControlName="email" name="email" required>
+				<small class="form-text text-danger text-muted"
+					*ngIf="myForm.submitted && registerForm.controls.email.invalid">Enter Correct MailID</small>
+			</div>
+			<!-- Password -->
+			<input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password"
+				formControlName="password" name="password" required
+				aria-describedby="defaultRegisterFormPasswordHelpBlock">
+			<small class="form-text text-danger text-muted"
+				*ngIf=" myForm.submitted && registerForm.controls.password.invalid">Your Password pattern did not
+				match</small>
+			<small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+				At least 8 characters with mix of upperCase & lowerCase letters,numbers & symbols
+			</small>
+
+			<!-- Phone number -->
+			<input type="number" id="defaultRegisterPhonePassword" class="form-control" placeholder="Phone number"
+				formControlName="phoneNo" name="phoneNo" required aria-describedby="defaultRegisterFormPhoneHelpBlock">
+			<small *ngIf="myForm.submitted && registerForm.controls.phoneNo.invalid"
+				class="form-text text-danger text-muted mb-4">Invalid Phone No</small>
+			<div>
+				<small class="form-text text-danger text-muted">{{errorMessage}}</small>
+			</div>
+			<!-- Sign up button -->
+			<button mdbBtn color="info" block="true" class="my-4" type="submit"><span
+					class="spinner-border spinner-border-lg button-spinner" role="status" *ngIf="showSpinner"
+					aria-hidden="true"></span><span *ngIf="!showSpinner">Register</span></button>
+
+			<!-- Social register -->
+			<p>or sign up with:</p>
+
+			<a type="button" class="light-blue-text mx-2">
+				<mdb-icon fab icon="facebook"></mdb-icon>
+			</a>
+			<a type="button" class="light-blue-text mx-2">
+				<mdb-icon fab icon="twitter"></mdb-icon>
+			</a>
+			<a type="button" class="light-blue-text mx-2" (click)="signInwithGoogle()">
+				<mdb-icon fab icon="google"></mdb-icon>
+			</a>
+			<a type="button" class="light-blue-text mx-2">
+				<mdb-icon fab icon="github"></mdb-icon>
+			</a>
+			<hr>
+
+			<!-- Terms of service -->
+			<p>By clicking
+				<em>Sign up</em> you agree to our
+				<a (click)="terms()" target="_blank" style="color: blue;">terms of service</a></p>
+
+		</form>
+		<!-- Default form register -->
+	</div>
+</div>
+
+<div class="container-fluid container-styles" *ngIf="showTerms">
+	Terms
+	<div>
+	<button (click)="back()" class="btn btn-warning btn-sm">Back</button>
+	</div>
+</div>

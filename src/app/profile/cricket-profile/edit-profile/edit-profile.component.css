@@ -1,0 +1,12 @@
+.container-styles{
+	position: relative; 
+  top: 75px;
+  width:70%;
+}
+
+.head{
+  position: relative;
+  left: 30px;
+  right: 20px;
+  height: 50px;
+}

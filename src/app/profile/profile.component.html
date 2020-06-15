@@ -1,0 +1,21 @@
+<div *ngIf="showSpinnerPage">
+    <img src="../../assets/images/Spinner.gif" style="width: 100%; height: 50%;">
+</div>
+
+<div class="container-fluid container-styles" *ngIf="!showSpinnerPage">
+    <select class="form-control" id="sport" (change)="sport($event)">
+        <option value="" selected disabled>Select Sports</option>
+        <option value="cricket">Cricket</option>
+        <option value="football">Foot Ball</option>
+        <option value="tennis">Tennis</option>
+        <option value="batminton">BatMinton</option>
+    </select>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary" (click)="view()">View Profile</button>
+        </div>
+        <div class="col">
+            <button class="btn" (click)="edit()">Edit Profile</button>
+        </div>
+    </div>
+</div>

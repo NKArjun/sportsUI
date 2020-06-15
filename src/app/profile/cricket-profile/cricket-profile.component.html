@@ -1,0 +1,29 @@
+<div *ngIf="showSpinnerPage">
+    <img src="../../../assets/images/Spinner.gif" style="width: 100%; height: 50%;">
+</div>
+
+<div class="form-area" *ngIf="!showSpinnerPage">
+    <div class="img-area">
+        <img src="https://sportsservice.azurewebsites.net/images/{{userName}}.jpg" alt="">
+    </div>
+    <h2>{{userName}}<span class="ml-2"></span></h2>
+    <h2 style="color: violet;font-size: 25px;" class="mt-2">{{(profileList.ability==null)? "" : profileList.ability}}</h2>
+    <mat-list>
+        <mat-list-item>Matches<span class="space">{{profileList.matches}}</span></mat-list-item>
+        <mat-divider class="mat-divider"></mat-divider>
+        <mat-list-item>Runs<span class="space">{{profileList.runs}}</span></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Highest Score<span class="space">{{profileList.highestscore}}</span></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Average<span class="space">{{profileList.average}}</span></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Strike Rate<span class="space">{{profileList.strikerate}}</span></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Wickets<span class="space">{{profileList.wickets}}</span></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Best Bowling Figure<span class="space">{{profileList.bestbowlingfigure}}</span></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Economy<span class="space">{{profileList.economy}}</span></mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
+</div>

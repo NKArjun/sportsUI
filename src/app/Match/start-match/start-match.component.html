@@ -1,0 +1,113 @@
+<!--Navbar-->
+<div class="container-fluid container-styles">
+    <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+
+        <!-- Navbar brand -->
+        <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+        <div class="collapse navbar-collapse">
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" (click)="back()">
+                    <mdb-icon fas icon="arrow-left" style="color: black;"></mdb-icon>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Default form register -->
+    <form class="text-center border border-light p-5" [formGroup]="startMatch" (ngSubmit)="scorecard()">
+
+
+        <div *ngIf="!nextPage">
+            <div class="form-row mb-4">
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="team1" placeholder="Team1">
+                </div><span>Vs</span>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Team2" formControlName="team2">
+                </div>
+            </div>
+            <small class="text-danger text-muted mb-4" *ngIf="!team1True && nextSubmitted">Team1Code is not Valid</small>
+            <small class="text-danger text-muted ml-4" *ngIf="!team2True && nextSubmitted">Team2Code is not Valid</small>
+            <div class="bor mb-4">
+                <div>
+                    <label for="toss">Toss won by?</label>
+                </div>
+                <div class="form-row mb-4">
+                    <div class="col custom-control custom-radio">
+                        <input type="radio" value="team1" class="custom-control-input" id="team1" name="tossteam"
+                            formControlName="tossteam" mdbInput>
+                        <label class="custom-control-label" for="team1">Team1</label>
+                    </div>
+                    <div class="col custom-control custom-radio">
+                        <input type="radio" value="team2" class="custom-control-input" id="team2" name="tossteam"
+                            formControlName="tossteam" mdbInput>
+                        <label class="custom-control-label" for="team2">Team2</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bor mb-4">
+                <div>
+                    <label for="opt">Opted to?</label>
+                </div>
+                <div class="form-row mb-4">
+                    <div class="col custom-control custom-radio">
+                        <input type="radio" value="bat" class="custom-control-input" id="bat" formControlName="opted"
+                            name="opted" mdbInput>
+                        <label class="custom-control-label" for="bat">Bat</label>
+                    </div>
+                    <div class="col custom-control custom-radio">
+                        <input type="radio" value="bowl" class="custom-control-input" id="bowl" formControlName="opted"
+                            name="opted" mdbInput>
+                        <label class="custom-control-label" for="bowl">Bowl</label>
+                    </div>
+                </div>
+            </div>
+
+            <input type="number" class="form-control mb-4" formControlName="overs" placeholder="Overs?">
+            <small *ngIf="errorNextPage" class="mb-4 text-danger text-muted">{{errorNextPage}}</small>
+            <hr>
+            <button type="button" class="btn btn-info" (click)="next()">Next</button>
+        </div>
+
+        <div *ngIf="nextPage">
+            <p class="h4 mb-4">Select Opening Players</p>
+            <div class="mb-4">
+                <label class="left" for="striker">Striker</label>
+                <select id="striker" formControlName="striker" class="form-control mb-4">
+                    <option value="" selected disabled>Select Batsman</option>
+                    <option value="{{name.firstName+' '+name.lastName}}" *ngFor="let name of team1Players">{{name.firstName+" "+name.lastName}}</option>
+                </select>
+            </div>
+            <hr>
+            <div class="mb-4">
+                <label for="non-striker">Non-Striker</label>
+                <select id="non-striker" formControlName="nonStriker" class="form-control mb-4">
+                    <option value="" selected disabled>Select Batsman</option>
+                    <option value="{{name.firstName+' '+name.lastName}}" *ngFor="let name of team1Players">{{name.firstName+" "+name.lastName}}</option>
+                </select>
+            </div>
+            <hr>
+            <div class="mb-4">
+                <label for="bowler">Bowler</label>
+                <select id="bowler" formControlName="bowler" class="form-control mb-4">
+                    <option value="" selected disabled>Select Bowler</option>
+                    <option value="{{name.firstName+' '+name.lastName}}" *ngFor="let name of team2Players">{{name.firstName+" "+name.lastName}}</option>
+                </select>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-info">Start</button>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-secondary" (click)="back()">Back</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--/.Navbar-->

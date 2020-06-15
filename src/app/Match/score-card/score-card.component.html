@@ -1,0 +1,207 @@
+<div *ngIf="!showWicketPage && !showNextBowler">
+    <div class="container-fluid container-styles border border-light mb-4">
+        <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+            <a class="nav-link" (click)="back()">
+                <mdb-icon fas icon="arrow-left" style="color: black;"></mdb-icon>
+            </a>
+            <nav-brand>
+                <h4 style="font-weight: bold; color: white;">Score-Card</h4>
+            </nav-brand>
+        </nav>
+        <p class="mb-2" style="font-size: 20px;">Team1 - 1st innings</p>
+        <p style="font-size: 25px;">{{scorecardDetails.runs}}
+            <span class="ml-2">-</span>
+            <span class="ml-2">{{scorecardDetails.wickets}}</span>
+            <span class="ml-3">({{scorecardDetails.overs}}.{{scorecardDetails.balls}})</span>
+        </p>
+    </div>
+
+    <div class="container-fluid container-styles border border-light mb-4">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Batsman</th>
+                    <th scope="col">Runs</th>
+                    <th scope="col">Balls</th>
+                    <th scope="col">4s</th>
+                    <th scope="col">6s</th>
+                    <th scope="col">SR</th>
+                </tr>
+            </thead>
+            <tbody class="colour">
+                <tr>
+                    <td scope="row">{{scorecardDetails.striker}}<span *ngIf="scorecardDetails.isStrike"
+                            class="badge ml-1" style="font-size: 20px; color: saddlebrown;">*</span></td>
+                    <td>{{scorecardDetails.strikerRuns}}</td>
+                    <td>{{scorecardDetails.strikerBalls}}</td>
+                    <td>{{scorecardDetails.striker4s}}</td>
+                    <td>{{scorecardDetails.striker6s}}</td>
+                    <td>{{scorecardDetails.strikerSR}}</td>
+                </tr>
+                <tr>
+                    <td scope="row">{{scorecardDetails.nonStriker}}<span *ngIf="!scorecardDetails.isStrike"
+                            class="badge ml-1" style="font-size: 20px; color: saddlebrown;">*</span></td>
+                    <td>{{scorecardDetails.nonStrikerRuns}}</td>
+                    <td>{{scorecardDetails.nonStrikerBalls}}</td>
+                    <td>{{scorecardDetails.nonStriker4s}}</td>
+                    <td>{{scorecardDetails.nonStriker6s}}</td>
+                    <td>{{scorecardDetails.nonStrikerSR}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Bowler</th>
+                    <th scope="col">Overs</th>
+                    <th scope="col">M</th>
+                    <th scope="col">R</th>
+                    <th scope="col">W</th>
+                    <th scope="col">ER</th>
+                </tr>
+            </thead>
+            <tbody class="colour">
+                <tr>
+                    <td scope="row">{{scorecardDetails.bowler}}</td>
+                    <td>{{math.floor(scorecardDetails.bowlerBalls/6)+'.'+scorecardDetails.bowlerBalls % 6}}</td>
+                    <td>{{scorecardDetails.bowlerMaidens}}</td>
+                    <td>{{scorecardDetails.bowlerRuns}}</td>
+                    <td>{{scorecardDetails.bowlerWickets}}</td>
+                    <td>{{scorecardDetails.bowlerER}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="container-fluid container-styles border border-light over mb-4"
+        style="background-color:rgb(233, 238, 240)" id="addrun">
+        <span class="mr-5">This Over:</span>
+    </div>
+
+
+    <div class="container-fluid container-styles border border-light over mb-4">
+        <div class="row">
+            <div class="col">
+                <input type="checkbox" value="wide" id="wide" class="mr-2">
+                <label for="wide">Wide</label>
+            </div>
+            <div class="col">
+                <input type="checkbox" id="noball" value="noball" class="mr-2">
+                <label for="noball">No Ball</label>
+            </div>
+            <div class="col">
+                <input type="checkbox" id="byes" class="mr-2">
+                <label for="byes">Byes</label>
+            </div>
+            <div class="col">
+                <input type="checkbox" id="legbyes" class="mr-2">
+                <label for="legbyes">Leg Byes</label>
+            </div>
+            <div class="col">
+                <input type="checkbox" value="wicket" id="wicket" class="mr-2">
+                <label for="wicket">Wicket</label>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="container-fluid container-styles">
+        <div class="row">
+            <div class="col-md-3 border border-light pt-2 pb-2">
+                <div class="row ml-2 mb-2">
+                    <button type="button" class="btn btn-success" block="true" (click)="Undo()">Undo</button>
+                </div>
+                <div class="row ml-2 mb-2">
+                    <button type="button" class="btn btn-success" block="true">Partnership</button>
+                </div>
+                <div class="row ml-2 mb-2">
+                    <button type="button" class="btn btn-success" block="true">Extras</button>
+                </div>
+            </div>
+            <div class="col-md-8 border border-light pt-2 pb-2 ml-5">
+                <button type="button" value="0" class="btn btn-warning btn-circle btn-sm mr-4"
+                    (click)="addScore($event)">0</button>
+                <button type="button" value="1" class="btn btn-warning btn-circle btn-sm mr-4"
+                    (click)="addScore($event)">1</button>
+                <button type="button" value="2" class="btn btn-warning btn-circle btn-sm mr-4"
+                    (click)="addScore($event)">2</button>
+                <button type="button" value="3" class="btn btn-warning btn-circle btn-sm mr-4"
+                    (click)="addScore($event)">3</button>
+                <button type="button" value="4" class="btn btn-warning btn-circle btn-sm mr-4"
+                    (click)="addScore($event)">4</button>
+                <button type="button" value="5" class="btn btn-warning btn-circle btn-sm mr-4"
+                    (click)="addScore($event)">5</button>
+                <button type="button" value="6" class="btn btn-warning btn-circle btn-sm mr-4"
+                    (click)="addScore($event)">6</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="showWicketPage" class="container-fluid container-styles">
+    <div class="card border border-light">
+        <div class="card-header bg bg-success h-50">
+            <a class="nav-link" (click)="back()">
+                <mdb-icon fas icon="arrow-left" style="color: black;"></mdb-icon>
+                <span class="ml-4">Fall of Wicket</span>
+            </a>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="wicketForm" (ngSubmit)="selectNextBatsman()">
+                <select class="form-control mb-4" formControlName="wicket" (change)="wicketType($event)">
+                    <option value="" selected disabled>Select Wicket Type</option>
+                    <option value="bowled" selected>Bowled</option>
+                    <option value="catch-out">Catch out</option>
+                    <option value="run-out-striker">Run-Out Striker</option>
+                    <option value="run-out-nonStriker">Run-out NonStriker</option>
+                    <option value="stumping">Stumping</option>
+                    <option value="lbw">LBW</option>
+                    <option value="hit-wicket">Hit Wicket</option>
+                </select>
+                <div class="mb-2" *ngIf="true">
+                    <input type="checkbox" formControlName="batsManCrossed" class="mr-2" id="did">
+                    <label for="did">Did Batsmen Crossed?</label>
+                </div>
+                <select class="form-control mb-4" formControlName="helpedPlayer">
+                    <option value="" selected disabled>Who Helped?</option>
+                    <option [ngValue]="player" *ngFor="let player of scorecardDetails.players2Name">
+                        {{player.firstName+" "+player.lastName}}</option>
+                </select>
+                <select class="form-control mb-4" formControlName="newBatsman">
+                    <option value="" selected disabled>New Batsman</option>
+                    <option value="bowled" selected>Bowled</option>
+                    <option value="catch-out">Catch out</option>
+                    <option value="run-out-striker">Run-Out Striker</option>
+                    <option value="{{player}}" *ngFor="let player of scorecardDetails.players2Name">
+                        {{player.firstName+" "+player.lastName}}</option>
+                </select>
+                <button mdbBtn class="btn btn-success">Ok</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="showNextBowler" class="container-fluid container-styles">
+    <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+        <a class="nav-link" (click)="back()">
+            <mdb-icon fas icon="arrow-left" style="color: black;"></mdb-icon>
+        </a>
+        <nav-brand>
+            <h4 style="font-weight: bold; color: white;">Bowler</h4>
+        </nav-brand>
+    </nav>
+    <form #myForm="ngForm" (ngSubmit)="selectBowler(selectvalue.value)">
+        <select #selectvalue class="border border-light form-control" [(ngModel)]="nextBowler" name="nextBowler">
+            <option>Select Next Bowler</option>
+            <option [ngValue]="player" *ngFor="let player of scorecardDetails.players2Name">
+                {{player.firstName+" "+player.lastName}}</option>
+        </select>
+        <button class="btn btn-primary" type="submit">Ok</button>
+    </form>
+</div>

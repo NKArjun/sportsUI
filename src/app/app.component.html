@@ -1,0 +1,77 @@
+<div *ngIf="showSpinnerPage">
+	<img src="../../assets/images/Spinner.gif" style="width: 100%; height: 50%;">
+</div>
+
+<div *ngIf="!showSpinnerPage">
+	<nav class="navbar navbar-expand-sm bg-light color">
+		<div class='container-fluid'>
+			<ul class="navbar-nav iconpos social-network social-circle">
+				<!-- <li class="nav-item"><a class="icoFacebook nav-link" title="Facebook">
+						<mdb-icon fab icon="facebook"></mdb-icon>
+					</a></li>
+				<li class="nav-item"><a class="icoTwitter nav-link" title="Twitter">
+						<mdb-icon fab icon="twitter"></mdb-icon>
+					</a></li> -->
+				<li class="nav-item">
+					<a class="" [routerLink]="['/dashboard']" title="Dashboard"><i class="fab fa-accessible-icon"></i></a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li *ngIf="loggedUser.userId && userDetail?.notifications?.length > 1" class="nav-item dropdown"
+					dropdown>
+					<a class="nav-link dropdown-toggle waves-effect" dropdownToggle mdbWavesEffect>
+						<span class="badge red ml-1">{{userDetail.notifications.length-1}}</span>
+						<i class="fas fa-bell ml-1"></i>
+						<span class="ml-1">Notifications</span>
+					</a>
+					<div *dropdownMenu class="dropdown-menu dropdown-primary mb-4">
+						<div *ngFor="let notification of userDetail.notifications" class="dropdown-item waves-light">
+							<!-- <div *ngIf="notification.notification!=null"> -->
+							<!-- <i class="far fa-money-bill-alt" aria-hidden="true"></i> -->
+							<span class="ml-3">{{notification.notification}}</span>
+							<div *ngIf="notification.notification!=null" class="row">
+								<div class="col">
+									<button type="button" (click)="accept(notification)"
+										class="btn btn-success">Accept</button>
+								</div>
+								<div class="col">
+									<button type="button" (click)="reject()" class="btn btn-danger">Reject</button>
+								</div>
+							</div>
+							<!-- <span class="ml-5">
+								<i class="far fa-clock" aria-hidden="true"></i> 13 min ago
+							</span> -->
+							<!-- </div> -->
+						</div>
+					</div>
+				</li>
+				<li *ngIf="loggedUser.userId">
+					<a class="nav-link" [routerLink]="['/profile']">
+						<i class="fas fa-user"></i>
+						<span class="ml-1 clearfix d-none d-sm-inline-block">Profile</span>
+					</a>
+					<!-- <div class="text-right padding-right:15px"
+						id="welcome">Welcome {{loggedUser.userName | titlecase}}</div> -->
+				</li>
+				<!-- <li class="divider-vertical"></li> -->
+				<li *ngIf="!loggedUser.userId">
+					<div style="padding-right:15px">
+						<a mdbBtn class="btn btn-primary btn-sm" (click)="login()">Login</a>
+					</div>
+				</li>
+				<!-- <li *ngIf="!loggedUser.userName" class="divider-vertical"></li> -->
+				<li *ngIf="!loggedUser.userId">
+					<div style="padding-right:15px">
+						<a mdbBtn class="btn btn-primary btn-sm" (click)="register()">Register</a>
+					</div>
+				</li>
+				<li *ngIf="loggedUser.userId">
+					<div style="padding-right:15px">
+						<a mdbBtn class="btn btn-danger btn-sm" (click)="logout()">Logout</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<router-outlet></router-outlet>
+</div>

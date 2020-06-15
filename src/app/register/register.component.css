@@ -1,0 +1,41 @@
+@font-face{
+  font-family: myriad;
+  src: url(../../assets/font/myriad-pro-cufonfonts/MYRIADPRO-COND.OTF);
+}
+
+*{
+  font-family: myriad , 'Times New Roman', Times, serif;
+}
+
+
+.container-styles{
+	position: relative; 
+  top: 75px;
+  left: 50px;
+	width:50%
+}
+
+.padding{
+  padding-bottom:0px;
+  margin-bottom:0px;
+}
+
+.link-underline{
+   color:#337ab7;
+    text-decoration: underline;
+}
+
+.error{
+    color: red;
+    position:relative;
+    left:50px;
+}
+
+.bg-custom{
+	background-color: rgb(70, 88, 248)
+}
+
+.color{
+    color : rgb(88, 80, 80);
+    font-size: 95%;
+}

@@ -1,0 +1,14 @@
+.container-styles{
+	position: relative; 
+    top: 75px;
+    left: 50px;
+    width:50%;
+}
+
+.bor{
+    border: 3px solid rgb(183, 147, 207);
+}
+
+.left{
+    text-align: right;
+}
